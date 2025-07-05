@@ -58,3 +58,17 @@ This project demonstrates the implementation of microservices architecture using
 ## Logging
 
 Logs are written to the console and can be helpful for debugging.
+<pre>
+
+http://localhost:3002/service-a/users
+
+# Post to create new user
+curl -X POST <http://localhost:3002/service-a/users> \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "Test User",
+  "email": "<test@example.com>",
+  "age": 25
+}'
+
+</pre>
