@@ -1,0 +1,9 @@
+info: Service A: Received request to get users {"timestamp":"2025-07-05 03:51:59.676 PM"}
+info: Service A: Fetching all users from database {"timestamp":"2025-07-05 03:51:59.677 PM"}
+error: Service A: Error fetching users from database - Cannot read properties of undefined (reading 'find') {"timestamp":"2025-07-05 03:51:59.678 PM"}
+info: Service A: Received request to create user - Test User {"timestamp":"2025-07-05 04:02:48.340 PM"}
+info: Service A: Creating new user - Test User (test@example.com) {"timestamp":"2025-07-05 04:02:48.340 PM"}
+info: Service A: Successfully created user - Test User with ID 6868ff50dff52dc44fd6860c {"timestamp":"2025-07-05 04:02:48.349 PM"}
+info: Service A: Received request to get users {"timestamp":"2025-07-05 04:03:20.483 PM"}
+info: Service A: Fetching all users from database {"timestamp":"2025-07-05 04:03:20.483 PM"}
+info: Service A: Successfully fetched 1 users from database {"timestamp":"2025-07-05 04:03:20.493 PM"}
