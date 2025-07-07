@@ -12,14 +12,28 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { ClientProxy } from '@nestjs/microservices';
 import { Logger } from 'winston';
 
+/**
+ * The AppController class handles HTTP requests and communicates with
+ * microservices to perform operations related to users and todos.
+ */
 @Controller()
 export class AppController {
+  /**
+   * Constructs an instance of AppController.
+   * @param {ClientProxy} serviceA - Client proxy for communicating with Service A.
+   * @param {ClientProxy} serviceB - Client proxy for communicating with Service B.
+   * @param {Logger} logger - Logger instance for logging messages.
+   */
   constructor(
     @Inject('SERVICE_A') private readonly serviceA: ClientProxy,
     @Inject('SERVICE_B') private readonly serviceB: ClientProxy,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
+  /**
+   * Handles GET requests to '/service-a/users' to fetch users from Service A.
+   * @returns {Promise<any>} A promise that resolves to an array of users.
+   */
   @Get('/service-a/users')
   async getUsersFromServiceA() {
     this.logger.info('API Gateway: Fetching users from Service A');
@@ -38,6 +52,14 @@ export class AppController {
     }
   }
 
+  /**
+   * Handles POST requests to '/service-a/users' to create a user in Service A.
+   * @param {Object} userData - The data for the new user.
+   * @param {string} userData.name - The name of the user.
+   * @param {string} userData.email - The email of the user.
+   * @param {number} [userData.age] - The optional age of the user.
+   * @returns {Promise<any>} A promise that resolves to the created user.
+   */
   @Post('/service-a/users')
   async createUserInServiceA(
     @Body() userData: { name: string; email: string; age?: number },
@@ -61,6 +83,10 @@ export class AppController {
     }
   }
 
+  /**
+   * Handles GET requests to '/service-b/todos' to fetch all todos from Service B.
+   * @returns {Promise<any>} A promise that resolves to an array of todos.
+   */
   @Get('/service-b/todos')
   async getAllTodos() {
     this.logger.info('API Gateway: Fetching all todos from Service B');
@@ -79,6 +105,14 @@ export class AppController {
     }
   }
 
+  /**
+   * Handles POST requests to '/service-b/todos' to create a todo in Service B.
+   * @param {Object} todoData - The data for the new todo.
+   * @param {string} todoData.title - The title of the todo.
+   * @param {string} todoData.description - The description of the todo.
+   * @param {boolean} todoData.completed - The completion status of the todo.
+   * @returns {Promise<any>} A promise that resolves to the created todo.
+   */
   @Post('/service-b/todos')
   async createTodo(
     @Body()
@@ -107,6 +141,11 @@ export class AppController {
     }
   }
 
+  /**
+   * Handles DELETE requests to '/service-b/todos/:id' to delete a todo from Service B.
+   * @param {string} id - The ID of the todo to delete.
+   * @returns {Promise<any>} A promise that resolves to the result of the deletion.
+   */
   @Delete('/service-b/todos/:id')
   async deleteTodo(@Param('id') id: string) {
     this.logger.info(`API Gateway: Deleting todo with ID ${id} from Service B`);
